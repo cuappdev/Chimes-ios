@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct GlassCard<Content: View>: View {
+    let cornerRadius: CGFloat
     let content: Content
 
-    init(@ViewBuilder content: () -> Content) {
+    init(cornerRadius: CGFloat = 12, @ViewBuilder content: () -> Content) {
+        self.cornerRadius = cornerRadius
         self.content = content()
     }
 
@@ -18,15 +20,31 @@ struct GlassCard<Content: View>: View {
         content
             .padding(.vertical, 14)
             .padding(.horizontal, 22)
-            .background(Color.white.opacity(0.25))
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-//                    .stroke(DS.Colors.cardStroke, lineWidth: 1)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-//            .shadow(color: Color.black.opacity(DS.Shadow.soft.opacity),
-//                    radius: DS.Shadow.soft.radius,
-//                    x: 0,
-//                    y: DS.Shadow.soft.y)
+            .background {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.white.opacity(0.18))
+                    .background(.ultraThinMaterial)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(Color.white.opacity(0.35), lineWidth: 1)
+
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color.white.opacity(0.28),
+                                Color.white.opacity(0.06),
+                                Color.clear
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .blendMode(.softLight)
+                    .opacity(0.7)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .shadow(color: Color.black.opacity(0.10), radius: 10, x: 0, y: 8)
     }
 }

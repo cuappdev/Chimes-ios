@@ -28,33 +28,13 @@ struct KudosRowView: View {
                     Button {
                         onTap(type)
                     } label: {
-                        ZStack {
-                            // Layer 1 (glow)
-                            RoundedRectangle(cornerRadius: 36)
-                                .fill(glowFill)
-                                .frame(width: 36, height: 36)
-                                .blur(radius: 10)
-                                .blur(radius: 20)
-
-                            // Layer 2 (base)
-                            RoundedRectangle(cornerRadius: 64)
-                                .fill(baseFill)
-                                .frame(width: 64, height: 64)
-
-                            // Layer 3 (tint)
-                            RoundedRectangle(cornerRadius: 64)
-                                .fill(tintFill)
-                                .frame(width: 64, height: 64)
-
-                            // Content
+                        GlassCircle(size: 64) {
                             Text(type.emoji)
                                 .font(.custom("Inter", size: 36).weight(.medium))
                         }
-                        .frame(width: 64, height: 64)
                     }
                     .buttonStyle(.plain)
 
-                    // Auto spacing between buttons
                     if idx != KudosType.allCases.count - 1 {
                         Spacer(minLength: 0)
                     }
