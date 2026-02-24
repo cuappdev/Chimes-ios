@@ -12,11 +12,13 @@ struct HomeBackgroundView: View {
         GeometryReader { geo in
             ZStack(alignment: .topLeading) {
 
-                LinearGradient(
-                    colors: [.daytimeSky, .daytimeSlope],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                // Sky background (replaces gradient)
+                Image("SkyDay")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: 411)
+                    .clipped()
+                    .offset(x: 0, y: 0)
 
                 // Slope
                 Image("SlopeDay")
