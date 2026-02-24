@@ -21,11 +21,31 @@ struct HomeBackgroundView: View {
                 // Slope
                 Image("SlopeDay")
                     .resizable()
+                    .scaledToFill()
+                    .frame(width: geo.size.width, height: 594)
+                    .clipped()
+                    .offset(x: 0, y: 289)
+                
+                // TreesFront
+                Image("TreesFront")
+                    .resizable()
                     .scaledToFit()
-                    .frame(width: 400, height: 594)
+                    .frame(width: 172.00005, height: 102.7138)
+                    .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
                     .offset(
-                        x: (geo.size.width - 400) / 2,
-                        y: 289
+                        x: -17,
+                        y: 324
+                    )
+
+                // TreesBack
+                Image("TreesBack")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 68.00006, height: 58.7138)
+                    .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 1)
+                    .offset(
+                        x: geo.size.width - 320 - 68.00006, // right = 320
+                        y: 346
                     )
 
                 // Tower
@@ -37,6 +57,7 @@ struct HomeBackgroundView: View {
                         x: geo.size.width - 29 - 164,
                         y: 165
                     )
+                    .shadow(color: .black.opacity(0.13), radius: 2, x: 1, y: 2)
 
             }
             .ignoresSafeArea()
